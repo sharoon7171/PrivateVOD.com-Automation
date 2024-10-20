@@ -1,9 +1,23 @@
 // content.js
 window.addEventListener('load', () => {
-    chrome.storage.sync.get(['clickOption', 'enableAutoClick', 'enableAutoRefresh', 'refreshInterval', 'enableMoveUserActions', 'enableAutoPlayClick'], (data) => {
-        // Auto Click Logic
-        if (data.enableAutoClick) {
-            const button = document.querySelector('a.btn[data-label="Favorite"]'); // Adjust selector as needed
+    chrome.storage.sync.get({
+        enableExtension: true,
+        clickOption: 'active',
+        enableAutoClick: true,
+        enableAutoRefresh: true,
+        refreshInterval: 5,
+        enableMoveUserActions: false,
+        enableAutoPlayClick: true
+    }, (data) => {
+        // Check if the extension is enabled
+        if (!data.enableExtension) {
+            console.log('Extension is disabled');
+            return; // Exit if the extension is disabled
+        }
+
+        // Auto Click Logic - Only execute if URL contains "video.html"
+        if (data.enableAutoClick && window.location.href.includes('video.html')) {
+            const button = document.querySelector('a.btn[data-label="Favorite"]');
             if (button) {
                 const isActive = button.classList.contains('active');
                 const clickWhenActive = data.clickOption === 'active';
@@ -14,10 +28,9 @@ window.addEventListener('load', () => {
 
                     // Auto Refresh Logic
                     if (data.enableAutoRefresh) {
-                        const refreshInterval = data.refreshInterval || 5; // Default to 5 seconds
                         setTimeout(() => {
-                            window.location.reload(); // Refresh the page
-                        }, refreshInterval * 1000); // Convert seconds to milliseconds
+                            window.location.reload();
+                        }, data.refreshInterval * 1000);
                     }
                 }
             }
@@ -34,9 +47,11 @@ window.addEventListener('load', () => {
         }
 
         // Auto Click "Watch Now" Button Logic
-        const watchNowButton = document.getElementById('ppmWatchNow');
-        if (watchNowButton && data.enableAutoPlayClick) { // Check if auto play click is enabled
-            watchNowButton.click(); // Simulate click on the button
+        if (data.enableAutoPlayClick) {
+            const watchNowButton = document.getElementById('ppmWatchNow');
+            if (watchNowButton) {
+                watchNowButton.click();
+            }
         }
     });
 });

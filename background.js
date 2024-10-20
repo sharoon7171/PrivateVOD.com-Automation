@@ -1,5 +1,6 @@
-// background.js
-// No additional code needed for this simple extension
+chrome.action.onClicked.addListener((tab) => {
+  chrome.runtime.openOptionsPage();
+});
 
 
 

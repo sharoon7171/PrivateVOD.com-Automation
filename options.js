@@ -2,6 +2,7 @@
 
 // Function to save all options
 function saveOptions() {
+    const isExtensionEnabled = document.getElementById('enableExtension').checked;
     const isEnabledAutoClick = document.getElementById('enableAutoClick').checked;
     const isEnabledAutoRefresh = document.getElementById('enableAutoRefresh').checked;
     const selectedOption = document.querySelector('input[name="clickOption"]:checked').value;
@@ -11,30 +12,40 @@ function saveOptions() {
 
     // Save all options in one go
     chrome.storage.sync.set({
+        enableExtension: isExtensionEnabled,
         enableAutoClick: isEnabledAutoClick,
         enableAutoRefresh: isEnabledAutoRefresh,
         clickOption: selectedOption,
         refreshInterval: parseInt(refreshInterval, 10),
         enableMoveUserActions: isEnabledMoveUserActions,
-        enableAutoPlayClick: isEnabledAutoPlayClick // Save auto play click option
+        enableAutoPlayClick: isEnabledAutoPlayClick
+    }, () => {
+        console.log('Options saved');
     });
 }
 
 // Load saved options
 document.addEventListener('DOMContentLoaded', () => {
-    chrome.storage.sync.get(['clickOption', 'enableAutoClick', 'enableAutoRefresh', 'refreshInterval', 'enableMoveUserActions', 'enableAutoPlayClick'], (data) => {
+    chrome.storage.sync.get({
+        enableExtension: true,
+        clickOption: 'active',
+        enableAutoClick: true,
+        enableAutoRefresh: true,
+        refreshInterval: 5,
+        enableMoveUserActions: false,
+        enableAutoPlayClick: true
+    }, (items) => {
         // Set the radio button based on saved option
-        if (data.clickOption) {
-            document.querySelector(`input[name="clickOption"][value="${data.clickOption}"]`).checked = true;
-        }
+        document.getElementById('enableExtension').checked = items.enableExtension;
+        document.querySelector(`input[name="clickOption"][value="${items.clickOption}"]`).checked = true;
         // Set the checkbox based on saved state
-        document.getElementById('enableAutoClick').checked = data.enableAutoClick !== undefined ? data.enableAutoClick : true;
-        document.getElementById('enableAutoRefresh').checked = data.enableAutoRefresh !== undefined ? data.enableAutoRefresh : true;
-        if (data.refreshInterval) {
-            document.querySelector(`input[name="refreshInterval"][value="${data.refreshInterval}"]`).checked = true;
+        document.getElementById('enableAutoClick').checked = items.enableAutoClick;
+        document.getElementById('enableAutoRefresh').checked = items.enableAutoRefresh;
+        if (items.refreshInterval) {
+            document.querySelector(`input[name="refreshInterval"][value="${items.refreshInterval}"]`).checked = true;
         }
-        document.getElementById('enableMoveUserActions').checked = data.enableMoveUserActions !== undefined ? data.enableMoveUserActions : false;
-        document.getElementById('enableAutoPlayClick').checked = data.enableAutoPlayClick !== undefined ? data.enableAutoPlayClick : true;
+        document.getElementById('enableMoveUserActions').checked = items.enableMoveUserActions;
+        document.getElementById('enableAutoPlayClick').checked = items.enableAutoPlayClick;
 
         // Remove the loading class to show the options
         document.body.classList.remove('loading');
