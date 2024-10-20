@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "PrivateVod.com Automation",
+  "version": "1.0",
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["*://*.privatevod.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

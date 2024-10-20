@@ -1,0 +1,79 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+}
+
+input[type="number"] {
+    width: 50px;
+    margin-left: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-options {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.refresh-options span {
+    margin-right: 10px;
+    font-weight: bold; /* Make the label bold */
+}
+
+.custom-radio {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.radio-btn {
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    border-radius: 30px; /* More rounded corners */
+    background-color: #fff;
+    color: #007bff;
+    font-weight: bold; /* Make text bold */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-size: 16px; /* Increase font size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.custom-radio input[type="radio"]:checked + .radio-btn {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #0056b3; /* Darker border when selected */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Darker shadow when selected */
+}
+
+.custom-radio:hover .radio-btn {
+    background-color: #e7f0ff; /* Light blue background on hover */
+    border-color: #0056b3; /* Darker border on hover */
+    color: #0056b3; /* Darker text color on hover */
+}
