@@ -98,3 +98,15 @@ input[type="number"] {
 .row + .row {
     margin-top: 10px;
 }
+
+body.loading .section {
+    display: none;
+}
+
+body.loading::after {
+    content: "Loading...";
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}

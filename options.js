@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector(`input[name="refreshInterval"][value="${data.refreshInterval}"]`).checked = true;
         }
         document.getElementById('enableMoveUserActions').checked = data.enableMoveUserActions !== undefined ? data.enableMoveUserActions : false;
-        document.getElementById('enableAutoPlayClick').checked = data.enableAutoPlayClick !== undefined ? data.enableAutoPlayClick : true; // Load auto play click option
+        document.getElementById('enableAutoPlayClick').checked = data.enableAutoPlayClick !== undefined ? data.enableAutoPlayClick : true;
+
+        // Remove the loading class to show the options
+        document.body.classList.remove('loading');
     });
 });
 
