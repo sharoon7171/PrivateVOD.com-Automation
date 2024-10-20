@@ -8,17 +8,28 @@
 <body>
     <h1>PrivateVod.com Automation</h1> <!-- Display the extension name -->
 
-    <div class="section">
-        <h2>Favourite Settings</h2>
-        <label>
-            <input type="checkbox" id="enableAutoClick" checked> Enable Auto Click
-        </label>
-        <label>
-            <input type="radio" name="clickOption" value="active" checked> Unfavourite
-        </label>
-        <label>
-            <input type="radio" name="clickOption" value="inactive"> Favourite
-        </label>
+    <div class="row">
+        <div class="section">
+            <h2>Favourite Settings</h2>
+            <label>
+                <input type="checkbox" id="enableAutoClick" checked> Enable Auto Click
+            </label>
+            <div>
+                <label>
+                    <input type="radio" name="clickOption" value="active" checked> Unfavourite
+                </label>
+                <label>
+                    <input type="radio" name="clickOption" value="inactive"> Favourite
+                </label>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Auto Play</h2>
+            <label>
+                <input type="checkbox" id="enableAutoPlayClick" checked> Enable Auto Play Click
+            </label>
+        </div>
     </div>
 
     <div class="section">
@@ -75,13 +86,6 @@
         <h2>Move User Actions</h2>
         <label>
             <input type="checkbox" id="enableMoveUserActions"> Enable Move User Actions
-        </label>
-    </div>
-
-    <div class="section">
-        <h2>Auto Play Click</h2>
-        <label>
-            <input type="checkbox" id="enableAutoPlayClick" checked> Enable Auto Play Click
         </label>
     </div>
 
