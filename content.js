@@ -35,5 +35,14 @@ window.addEventListener('load', () => {
                 console.log('User actions or target element not found.');
             }
         }
+
+        // Auto Click "Watch Now" Button Logic
+        const watchNowButton = document.getElementById('ppmWatchNow');
+        if (watchNowButton) {
+            watchNowButton.click(); // Simulate click on the button
+            console.log('Clicked the "Watch Now" button.');
+        } else {
+            console.log('"Watch Now" button not found.');
+        }
     });
 });
